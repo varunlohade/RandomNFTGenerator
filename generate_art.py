@@ -61,14 +61,15 @@ def generate_art(path: str):
             p2 = points[i-1]
         line_xy = (p1, p2)
         color_factor = i/n_points
-        line_color = interpolate(startColor = start_color, endColor= end_color,factor=color_factor)
+        line_color = interpolate(startColor = start_color, endColor= end_color, factor=color_factor)
         thickness += scale_factor
+        # overlay_draw.(line_xy,fill=line_color, outline=line_color)
         # overlay_draw.line(line_xy, fill=line_color, width=thickness)
-        overlay_draw.rectangle(line_xy,fill=line_color, width=thickness)
-        # overlay_draw.arc(xy=line_xy, start=min_x, end=max_y)
+        overlay_draw.line(line_xy,fill=line_color, width=thickness)
+        
         image = ImageChops.add(image, overlay_image)
 
-    image =image.resize((target_size_px, target_size_px), resample=Image.ANTIALIAS)
+    image =image.resize((target_size_px, target_size_px), resample= Image.ANTIALIAS)
     image.save(path)
 if __name__ == '__main__':
     for i in range(10):
